@@ -25,98 +25,26 @@ Otra estrategia clave es la priorización del Product Backlog, enfocándose prim
 
 Finalmente, se fomentará la comunicación continua entre las áreas técnicas y de negocio, permitiendo una toma de decisiones más rápida y flexible. Con el enfoque Kanban, el proyecto podría adaptarse mejor a cambios del entorno y a las necesidades reales de los usuarios, reduciendo los riesgos que llevaron al fracaso de Quibi.
 
+
+
+
+RIDE TO CLASS
+-------------------------------------------------------
+Ride to Class es una aplicación híbrida que facilita el transporte compartido entre
+estudiantes, permitiendo que los conductores ofrezcan sus viajes y los pasajeros
+encuentren rutas adecuadas para ir a la escuela. La app optimiza los
+desplazamientos dentro del campus y promueve la economía colaborativa entre los
+estudiantes
 ## ROLES
-|Encargado |ROL   |
-|----------	------	
-| MENDOZA KAUIL CARLOS EDUARDO|Coordinador Kanban  | 
-| REYES DOLORES ALEJANDRO |Product Owner  |      |
-| ALEJANDRO SANCHEZ | Diseñador UX/UI   |
-| COHEN ALAIN|Desarrollador Backend  |  |
-|MENDOZA KAUIL |Desarrollador Frontend|        |
-|REYES DOLORES ALEJANDRO|Tester / Control de calidad (QA)|
-##REQUISITOS DE ROL Y RESPONSABILIDADES
 
-- COORDINADOR KANBAN 
+## 👥 Equipo y Roles del Proyecto
 
- **Actividades **
-   - supervisar el tablero de kanban.
-   - Asegurar que el flujo de trabajo sea continuo.
-   - Identificar cuellos de botella y proponer mejoras.
-   - coordinar la comunicación entre areas
+| Integrante | Rol | Responsabilidades y Aptitudes Clave |
+| :--- | :--- | :--- |
+| **Mendoza Kauil Carlos Eduardo** | Coordinador Kanban | Liderazgo, organización de flujos ágiles, resolución de cuellos de botella y comunicación interáreas. |
+| **Reyes Dolores Alejandro** | Product Owner | Visión de negocio, priorización de valor al usuario, análisis de feedback y toma de decisiones estratégicas. |
+| **Alejandro Sanchez** | Diseñador UX/UI | Enfoque centrado en el usuario, diseño de interfaces intuitivas, creatividad y análisis de usabilidad. |
+| **Cohen Alain** | Desarrollador Backend | Lógica de sistemas, gestión de bases de datos/APIs, seguridad informática y resolución de problemas técnicos. |
+| **Mendoza Kauil** | Desarrollador Frontend | Dominio de tecnologías web (HTML/CSS/JS), diseño responsivo, optimización móvil y atención al detalle visual. |
+| **Reyes Dolores Alejandro** | Tester / QA | Control de calidad, detección de errores, análisis de fallos y comunicación clara para la mejora continua. |
 
- **responsabilidades**
-   - Conocimiento básico de metodologías ágiles (Kanban).
-   - Habilidad de organización y liderazgo.
-   - Capacidad para tomar decisiones rápidas.
-   - Buena comunicación con el equipo.
-   
-- PRODUCT OWNER 
-
-    **Actividades**
-   - Definir prioridades del backlog.
-   - Asegurar que el producto entregue valor al usuario.
-   - Analizar métricas y retroalimentación de usuarios.
-   - Ajustar funcionalidades según la demanda del mercado.
-   **responsabilidades**
-   - Conocimiento del negocio y del mercado de streaming.
-   - Capacidad de análisis y toma de decisiones.
-   - Comunicación constante con usuarios y equipo técnico.
-   - Enfoque en experiencia del usuario.
-
-   
-- DESARROLLADOR FRONTEND
-
-  **Actividades **
-   - Diseñar e implementar la interfaz de usuario.
-   - Optimizar la experiencia en dispositivos móviles.
-   - Corregir errores visuales y de interacción.
-   - Colaborar con el equipo UX/UI.
-
- **responsabilidades**
-   - Conocimientos en HTML, CSS y JavaScript.
-   - Experiencia en diseño responsivo.
-   - Capacidad para trabajar con tareas pequeñas y continuas.
-   - Atención al detalle.
-
-
-- DESARROLLADOR BACKEND 
-
- **Actividades **
-   - Implementar la lógica del sistema.
-   - Gestionar bases de datos y servidores.
-   - Integrar servicios y APIs.
-   - Garantizar seguridad y rendimiento.
-
- **responsabilidades**
-   - Conocimientos en lenguajes backend y bases de datos.
-   - Experiencia en manejo de APIs.
-   - Capacidad para resolver problemas técnicos.
-   - Buen trabajo en equipo.
-
-- Diseñador UX/UI
-
- **Actividades **
-   - Diseñar flujos de navegación sencillos.
-   - Realizar pruebas de usabilidad.
-   - Proponer mejoras basadas en la experiencia del usuario.
-   - Colaborar con desarrollo frontend.
-
- **responsabilidades**
-   - Conocimientos en diseño de interfaces.
-   - Enfoque en el usuario.
-   - Capacidad para interpretar retroalimentación.
-   - Creatividad y análisis.
-   
-- TESTER /CONTROL DE CALIDAD (QA)
-
- **Actividades **
-   - Probar funcionalidades antes de liberarlas.
-   - Detectar errores y reportarlos en el tablero Kanban.
-   - Verificar que los cambios no afecten otras funciones.
-   - Apoyar la mejora continua del producto.
-
- **responsabilidades**
-   - Atención al detalle.
-   - Capacidad de análisis.
-   - Conocimientos básicos de pruebas de software.
-   - Comunicación clara de errores.
