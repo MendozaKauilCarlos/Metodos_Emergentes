@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Ride to Class - Registro de conductor</title>
+    <meta name="description" content="Transporte estudiantil seguro y confiable">
+    <meta name="theme-color" content="#00d4aa">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- PWA Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Ride to Class">
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+
+    <!-- Service Worker para PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then((registration) => {
+                        console.log('Service Worker registrado:', registration);
+                    })
+                    .catch((error) => {
+                        console.log('Error registrando Service Worker:', error);
+                    });
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div id="login-screen" class="screen active">
+        <div class="login-container">
+            <div class="login-header">
+                <div class="logo-circle">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h1>Ride to Class</h1>
+                <p class="subtitle"> Registro de Conductor</p>
+                <p class="tagline">Únete a la comunidad de Ride to Class</p>
+            </div>
+
+        <div class="login-card">
+            <form id="driver-reg-form" class="auth-form active">
+                <div class="subtitle">DATOS PERSONALES</div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> NOMBRE COMPLETO</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="driver-name" placeholder="Tu nombre" required>
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    <label><i class="fas fa-id-card"></i> NÚMERO DE CONTROL</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="driver-control" placeholder="8 dígitos" required>
+                    </div>
+                </div>
+            
+                <div class="subtitle">DATOS DEL VEHÍCULO</div>
+            
+                <div class="form-group">
+                    <label><i class="fas fa-address-card"></i> LICENCIA DE CONDUCIR</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="driver-license" placeholder="Número de licencia" required>
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    <label><i class="fas fa-car"></i> MODELO Y PLACAS</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="driver-car" placeholder="Ej: Nissan Versa - ABC-123" required>
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    <label><i class="fas fa-lock"></i> CONTRASEÑA</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="driver-password" placeholder="Crea una contraseña" required>
+                    </div>
+                </div>
+            
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-car"></i> REGISTRAR VEHÍCULO
+                </button>
+            </form>
+            </div>
+            </div>
+</body>
+
+</html>
