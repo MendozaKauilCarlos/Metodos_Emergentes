@@ -3,14 +3,14 @@ const usuarios = [
   {
     id: 1,
     nombre: 'Carlos',
-    email: 'carlos@ejemplo.edu',
+    email: 'carlos@itcancun.edu.mx',
     rol: 'conductor',
     telefono: '+52 555 000 0001',
   },
   {
     id: 2,
     nombre: 'Alejandro',
-    email: 'alejandro@ejemplo.edu',
+    email: 'alejandro@itcancun.edu.mx',
     rol: 'pasajero',
     telefono: '+52 555 000 0002',
   },
