@@ -1,0 +1,37 @@
+/* ESTILOS ESPECÍFICOS DEL DASHBOARD */
+.dashboard-body { background-color: #0b0d0c; color: white; padding: 20px; }
+
+.user-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.greeting { font-size: 12px; color: #888; }
+.profile-icon { font-size: 35px; color: #16c79a; margin-right: 10px; }
+
+.card { 
+    display: flex; justify-content: space-between; align-items: center; 
+    padding: 15px; border-radius: 12px; margin-bottom: 12px; cursor: pointer;
+}
+.bg-red { background-color: #e74c3c; }
+.bg-green { background-color: #16c79a; }
+
+.card-content { display: flex; align-items: center; gap: 15px; }
+.card-content strong { display: block; font-size: 14px; }
+.card-content small { font-size: 10px; opacity: 0.8; }
+
+.menu-item {
+    background-color: #1e1e1e; padding: 18px; border-radius: 12px;
+    display: flex; align-items: center; gap: 15px; margin-bottom: 10px;
+}
+.menu-item span { flex-grow: 1; font-size: 14px; }
+
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+.stat-card { background-color: #1e1e1e; padding: 15px; border-radius: 12px; text-align: center; }
+.stat-card strong { display: block; font-size: 20px; margin: 5px 0; }
+.stat-card span { font-size: 9px; color: #888; }
+
+.bottom-nav {
+    position: fixed; bottom: 0; left: 0; width: 100%;
+    background-color: #161616; display: flex; justify-content: space-around;
+    padding: 12px 0; border-top: 1px solid #333;
+}
+.nav-btn { color: #555; text-align: center; font-size: 10px; }
+.nav-btn.active { color: #16c79a; }
+.nav-btn i { display: block; font-size: 18px; margin-bottom: 3px; }
