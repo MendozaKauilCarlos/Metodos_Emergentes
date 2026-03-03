@@ -48,3 +48,13 @@ estudiantes
 | **Mendoza Kauil** | Desarrollador Frontend | Dominio de tecnologías web (HTML/CSS/JS), diseño responsivo, optimización móvil y atención al detalle visual. |
 | **Reyes Dolores Alejandro** | Tester / QA | Control de calidad, detección de errores, análisis de fallos y comunicación clara para la mejora continua. |
 
+## Cómo ejecutar Ride to Class
+
+```bash
+cd backend
+npm install
+npm start
+```
+
+Luego abre **http://localhost:3000** en el navegador. Puedes registrarte con un correo **@itcancun.edu.mx** o iniciar sesión; la sesión se guarda en el navegador (localStorage).
+

@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const cors = require('cors');
 const usuariosRouter = require('./routes/usuarios');
 const viajesRouter = require('./routes/viajes');
@@ -10,7 +11,10 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
+// Frontend estático (Ride to Class app)
+app.use(express.static(path.join(__dirname, '..', '..', 'frontend')));
+
+app.get('/api', (req, res) => {
   res.json({
     nombre: 'Ride to Class API',
     version: '1.0.0',
