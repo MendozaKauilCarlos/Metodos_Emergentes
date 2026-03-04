@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Ruta - Ride to Class</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/home.css"> 
+     <link rel="stylesheet" href="css/ruta.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   
+</head>
+<body class="dashboard-body" id="v-crear-ruta">
+    <div class="container full-width">
+        
+        <div class="back-nav" onclick="window.location.href='home.html'">
+            <i class="fas fa-arrow-left"></i>
+            <h3>Crear Ruta</h3>
+        </div>
+
+        <div class="route-form-container">
+            <div class="form-group">
+                <label><i class="fas fa-route"></i> Nombre de la ruta</label>
+                <input type="text" class="form-control" placeholder="Ej: Ruta Universidad - Centro">
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-map-marker-alt"></i> Origen</label>
+                <div class="input-wrapper">
+                    <input type="text" class="form-control" placeholder="Punto de partida">
+                    <i class="fas fa-bullseye"></i> </div>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-flag-checkered"></i> Destino</label>
+                <input type="text" class="form-control" placeholder="Punto de llegada">
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-clock"></i> Horario de salida</label>
+                <input type="time" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-calendar-alt"></i> Días de la semana</label>
+                <div class="days-container">
+                    <button class="day-btn">LUN</button>
+                    <button class="day-btn">MAR</button>
+                    <button class="day-btn">MIÉ</button>
+                    <button class="day-btn">JUE</button>
+                    <button class="day-btn">VIE</button>
+                    <button class="day-btn">SÁB</button>
+                    <button class="day-btn">DOM</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-users"></i> Asientos disponibles</label>
+                <input type="number" class="form-control" value="4" min="1" max="8">
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-dollar-sign"></i> Precio por pasajero</label>
+                <input type="number" class="form-control" placeholder="Ej: 25">
+            </div>
+
+            <button class="btn-submit"><i class="fas fa-plus"></i> CREAR RUTA</button>
+        </div>
+
+        <h3 class="mis-rutas-title">Mis Rutas</h3>
+        </div>
+</body>
+</html>

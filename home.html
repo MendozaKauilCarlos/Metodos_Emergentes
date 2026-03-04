@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ride to Class - Dashboard</title>
-    <link rel="stylesheet" href="css/styles.css"> <link rel="stylesheet" href="css/home.css"> 
+    <link rel="stylesheet" href="css/styles.css"> 
+    <link rel="stylesheet" href="css/home.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="dashboard-body">
@@ -17,7 +18,10 @@
                     <h3 id="display-name">PAKO</h3>
                 </div>
             </div>
-            <i class="fas fa-bell notification-badge"></i>
+            <div class="notification-container">
+                <i class="fas fa-bell"></i>
+                <span class="badge">2</span>
+            </div>
         </header>
 
         <div class="action-buttons">
@@ -32,43 +36,72 @@
                 <i class="fas fa-chevron-right"></i>
             </div>
 
-            <div class="card bg-green">
+            <div class="card bg-green" id="btn-status">
                 <div class="card-content">
                     <i class="fas fa-toggle-on"></i>
                     <div>
-                        <strong>Conectarse</strong>
-                        <small>Disponible para recibir viajes</small>
+                        <strong id="status-text">Desconectarse</strong>
+                        <small id="status-desc">No disponible para viajes</small>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+
+                        <div class="card bg-dark" id="btn-ir-solicitudes" style="cursor: pointer;">
+                <div class="card-content">
+                    <i class="fas fa-bell"></i>
+                    <div>
+                        <strong>Solicitudes de Viaje</strong>
+                        <small>Ver viajes solicitados</small>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+
+            <div class="card bg-dark">
+                <div class="card-content">
+                    <i class="fas fa-route"></i>
+                    <div>
+                        
+                        <strong>Viajes Activos</strong>
+                        <small>Gestionar viajes en curso</small>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+
+            <div class="card bg-dark">
+                <div class="card-content">
+                    <i class="fas fa-plus-circle"></i>
+                    <div>
+                        <strong>Crear Ruta</strong>
+                        <small>Crear una ruta recurrente</small>
                     </div>
                 </div>
                 <i class="fas fa-chevron-right"></i>
             </div>
         </div>
 
-        <div class="menu-options">
-            <div class="menu-item">
-                <i class="fas fa-bell"></i>
-                <span>Solicitudes de Viaje</span>
-                <i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="menu-item">
-                <i class="fas fa-route"></i>
-                <span>Viajes Activos</span>
-                <i class="fas fa-chevron-right"></i>
-            </div>
-        </div>
-
         <section class="stats-section">
-            <h4>Viajes Recientes</h4>
+            <div class="stats-header">
+                <h4>Viajes Recientes</h4>
+                <span class="view-all">Ver todos</span>
+            </div>
             <div class="stats-grid">
                 <div class="stat-card">
-                    <i class="fas fa-snake green-icon"></i>
+                    <i class="fas fa-check-circle icon-green"></i>
                     <strong>12</strong>
                     <span>VIAJES COMPLETADOS</span>
                 </div>
                 <div class="stat-card">
-                    <i class="fas fa-star green-icon"></i>
+                    <i class="fas fa-star icon-green"></i>
                     <strong>4.8</strong>
                     <span>CALIFICACIÓN</span>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock icon-green"></i>
+                    <strong>2.5h</strong>
+                    <span>TIEMPO AHORRADO</span>
                 </div>
             </div>
         </section>
@@ -82,13 +115,35 @@
     </div>
 
     <script>
-        // Pequeño script para poner el nombre real del que inició sesión
         document.addEventListener('DOMContentLoaded', () => {
+            // Cargar nombre del usuario
             const user = JSON.parse(localStorage.getItem('usuarioActivo'));
             if(user) {
                 document.getElementById('display-name').innerText = user.nombre.toUpperCase();
             }
+
+            // Lógica simple para el botón de Conectarse/Desconectarse
+            const btnStatus = document.getElementById('btn-status');
+            const statusText = document.getElementById('status-text');
+            const statusDesc = document.getElementById('status-desc');
+            
+            let isConnected = true;
+
+            btnStatus.addEventListener('click', () => {
+                isConnected = !isConnected;
+                if(isConnected) {
+                    btnStatus.classList.replace('bg-red', 'bg-green');
+                    statusText.innerText = "Desconectarse";
+                    statusDesc.innerText = "No disponible para viajes";
+                } else {
+                    btnStatus.classList.replace('bg-green', 'bg-red');
+                    statusText.innerText = "Conectarse";
+                    statusDesc.innerText = "Disponible para recibir viajes";
+                }
+            });
         });
     </script>
+
+    <script src="js/script.js"></script>
 </body>
 </html>

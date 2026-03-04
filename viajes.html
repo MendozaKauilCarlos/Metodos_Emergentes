@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viajes Activos - Ride to Class</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/home.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .empty-state-container { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            height: 80vh; 
+            text-align: center; 
+            color: #888; 
+        }
+        .empty-icon { 
+            font-size: 60px; 
+            margin-bottom: 20px; 
+            opacity: 0.5; 
+        }
+        .back-nav { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            margin-bottom: 20px; 
+            cursor: pointer; 
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body class="dashboard-body" id="v-viajes-activos">
+    <div class="container full-width">
+        
+        <div class="back-nav" onclick="window.location.href='home.html'">
+            <i class="fas fa-arrow-left"></i>
+            <h3>Viajes Activos</h3>
+        </div>
+
+        <div class="empty-state-container">
+            <i class="fas fa-route empty-icon"></i>
+            <p>No tienes viajes activos</p>
+        </div>
+
+    </div>
+    
+    </body>
+</html>

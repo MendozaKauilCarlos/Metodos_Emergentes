@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitudes de Viaje - Ride to Class</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/solicitud.css">
+    <link rel="stylesheet" href="css/home.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+</head>
+<body class="dashboard-body">
+    <div class="container full-width">
+        <div class="back-nav" onclick="window.location.href='home.html'">
+            <i class="fas fa-arrow-left"></i>
+            <h3>Solicitudes de Viaje</h3>
+        </div>
+
+        <div class="status-header-bar">
+            <div style="display: flex; align-items: center; gap: 5px;">
+                <div class="online-dot"></div>
+                <span style="font-size: 12px;">En línea</span>
+            </div>
+            <button class="card bg-green" style="margin-bottom: 0; padding: 10px 40px; border: none; color: white; font-weight: bold; width: auto;">
+                <i class="fas fa-toggle-on" style="margin-right: 10px;"></i> DESCONECTARSE
+            </button>
+        </div>
+
+        <div class="requests-container">
+            <i class="fas fa-bell-slash empty-icon"></i>
+            <p>No hay solicitudes de viaje disponibles</p>
+        </div>
+
+        <nav class="bottom-naav">
+            <div class="nav-btn" onclick="window.location.href='home.html'"><i class="fas fa-home"></i><span>Inicio</span></div>
+            <div class="nav-btn active"><i class="fas fa-history"></i><span>Viajes</span></div>
+            <div class="nav-btn"><i class="fas fa-map"></i><span>Mapa</span></div>
+            <div class="nav-btn"><i class="fas fa-user"></i><span>Perfil</span></div>
+        </nav>
+    </div>
+</body>
+</html>
