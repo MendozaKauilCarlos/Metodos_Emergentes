@@ -1,37 +1,141 @@
-/* ESTILOS ESPECÍFICOS DEL DASHBOARD */
-.dashboard-body { background-color: #0b0d0c; color: white; padding: 20px; }
+/* Reemplaza o añade estos estilos */
+.dashboard-body { background-color: #0b0d0c; color: white; padding: 20px; font-family: sans-serif; }
 
-.user-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
-.greeting { font-size: 12px; color: #888; }
-.profile-icon { font-size: 35px; color: #16c79a; margin-right: 10px; }
+.user-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 25px; }
+.user-info { display: flex; align-items: center; gap: 10px; }
+.profile-icon { font-size: 40px; color: #16c79a; }
+.greeting { font-size: 11px; color: #888; display: block; }
 
+/* Notificación con badge rojo */
+.notification-container { position: relative; font-size: 22px; color: white; margin-top: 5px; }
+.badge { 
+    position: absolute; top: -5px; right: -5px; 
+    background: #e74c3c; color: white; font-size: 9px; 
+    width: 15px; height: 15px; border-radius: 50%; 
+    display: flex; align-items: center; justify-content: center;
+}
+
+/* Tarjetas */
 .card { 
     display: flex; justify-content: space-between; align-items: center; 
-    padding: 15px; border-radius: 12px; margin-bottom: 12px; cursor: pointer;
+    padding: 18px; border-radius: 12px; margin-bottom: 12px; cursor: pointer;
 }
 .bg-red { background-color: #e74c3c; }
 .bg-green { background-color: #16c79a; }
+.bg-dark { background-color: #1e1e1e; }
 
 .card-content { display: flex; align-items: center; gap: 15px; }
+.card-content i { font-size: 20px; }
 .card-content strong { display: block; font-size: 14px; }
-.card-content small { font-size: 10px; opacity: 0.8; }
+.card-content small { font-size: 10px; opacity: 0.7; }
 
-.menu-item {
-    background-color: #1e1e1e; padding: 18px; border-radius: 12px;
-    display: flex; align-items: center; gap: 15px; margin-bottom: 10px;
+/* Estadísticas en 3 columnas */
+.stats-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.view-all { color: #16c79a; font-size: 11px; text-decoration: none; }
+
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.stat-card { background-color: #1e1e1e; padding: 15px 5px; border-radius: 12px; text-align: center; }
+.icon-green { color: #16c79a; font-size: 20px; margin-bottom: 10px; display: block; }
+.stat-card strong { font-size: 18px; }
+.stat-card span { font-size: 8px; color: #888; display: block; margin-top: 5px; }
+
+/* Navegación inferior */
+.bottom-nav { 
+    position: fixed; bottom: 0; left: 0; width: 100%; 
+    background: #111; display: flex; justify-content: space-around; 
+    padding: 10px 0; border-top: 1px solid #222; 
 }
-.menu-item span { flex-grow: 1; font-size: 14px; }
-
-.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-.stat-card { background-color: #1e1e1e; padding: 15px; border-radius: 12px; text-align: center; }
-.stat-card strong { display: block; font-size: 20px; margin: 5px 0; }
-.stat-card span { font-size: 9px; color: #888; }
-
-.bottom-nav {
-    position: fixed; bottom: 0; left: 0; width: 100%;
-    background-color: #161616; display: flex; justify-content: space-around;
-    padding: 12px 0; border-top: 1px solid #333;
-}
-.nav-btn { color: #555; text-align: center; font-size: 10px; }
+.nav-btn { color: #555; font-size: 9px; text-align: center; }
 .nav-btn.active { color: #16c79a; }
-.nav-btn i { display: block; font-size: 18px; margin-bottom: 3px; }
+.nav-btn i { font-size: 20px; display: block; margin-bottom: 2px; }
+
+
+/* ESTILOS ESPECÍFICOS PARA SOLICITUDES */
+
+.requests-screen {
+    background-color: #0b0d0c;
+    min-height: 100vh;
+}
+
+/* Barra Superior con Flecha y Título */
+.top-bar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+
+.top-bar i {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* El contenedor del botón "DESCONECTARSE" */
+.status-banner {
+    background-color: #1a1a1a;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-bottom: 50px;
+}
+
+.online-indicator {
+    position: absolute;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background-color: #16c79a;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #16c79a;
+}
+
+.dot-label {
+    font-size: 10px;
+    color: white;
+}
+
+/* El botón centralizado de la referencia */
+.btn-status-toggle {
+    background-color: #16c79a;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+/* Mensaje de "No hay solicitudes" */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+    color: #666;
+}
+
+.empty-state i {
+    font-size: 80px;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.empty-state p {
+    font-size: 14px;
+}

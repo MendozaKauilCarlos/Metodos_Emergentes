@@ -1,0 +1,38 @@
+
+        .requests-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 70vh;
+            text-align: center;
+            color: #888;
+        }
+        .empty-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        .status-header-bar {
+            background-color: #1e1e1e;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .online-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #16c79a;
+            border-radius: 50%;
+        }
+        .back-nav {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
