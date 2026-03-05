@@ -1,0 +1,28 @@
+body {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 50%, #1a1a1a 100%);
+    background-attachment: fixed;
+}
+
+body .screen {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(10, 10, 10, 0.95) 100%);
+}
+
+body .app-header {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.98) 0%, rgba(45, 52, 54, 0.98) 100%);
+    backdrop-filter: blur(10px);
+}
+
+body .bottom-nav {
+    background: linear-gradient(to top, rgba(45, 52, 54, 0.98) 0%, rgba(26, 26, 26, 0.98) 100%);
+    backdrop-filter: blur(10px);
+}
+
+body .profile-card,
+body .stat-card,
+body .trip-item,
+body .request-card,
+body .active-trip-card {
+    background: linear-gradient(135deg, rgba(45, 45, 45, 0.9) 0%, rgba(35, 35, 35, 0.9) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 212, 170, 0.1);
+}
