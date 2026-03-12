@@ -1,0 +1,128 @@
+import React from 'react';
+import { User, Bell, Menu, Edit, Settings, Download, HelpCircle, LogOut, ChevronRight } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+
+export default function Profile() {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login');
+  };
+
+  return (
+    <div className="min-h-screen bg-[#f0f2f5] dark:bg-zinc-900 text-[#2d3748] dark:text-zinc-100 pb-24 font-sans transition-colors duration-200">
+      
+      {/* Header */}
+      <header className="bg-white dark:bg-zinc-800 px-6 py-4 sticky top-0 z-10 shadow-sm flex justify-between items-center transition-colors duration-200">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-[#00d4aa] rounded-full flex items-center justify-center text-white">
+            <User size={20} />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-[11px] text-[#718096] dark:text-zinc-400 font-medium">¡Buenas tardes!</span>
+            <span className="text-[13px] font-bold text-[#2d3748] dark:text-zinc-100 uppercase tracking-wide">PAKO</span>
+          </div>
+        </div>
+        <div className="flex items-center gap-6">
+          <div className="relative cursor-pointer">
+            <Bell size={24} className="text-[#4a5568] dark:text-zinc-300 fill-[#4a5568] dark:fill-zinc-300" />
+            <span className="absolute -top-1.5 -right-1.5 bg-[#e74c3c] text-white text-[10px] font-bold w-[18px] h-[18px] rounded-full flex items-center justify-center border-2 border-white dark:border-zinc-800">3</span>
+          </div>
+          <Menu size={28} className="text-[#4a5568] dark:text-zinc-300 cursor-pointer" />
+        </div>
+      </header>
+
+      <main className="p-4 md:p-8 max-w-[800px] mx-auto mt-4 space-y-4">
+        
+        {/* Tarjeta de Perfil Principal */}
+        <div className="bg-white dark:bg-zinc-800 rounded-2xl p-8 shadow-sm border border-gray-100 dark:border-zinc-700 flex flex-col items-center transition-colors duration-200">
+          
+          {/* Avatar Grande */}
+          <div className="w-24 h-24 bg-[#00d4aa] rounded-full flex items-center justify-center text-white mb-4 shadow-md shadow-[#00d4aa]/20">
+            <User size={48} />
+          </div>
+          
+          {/* Info Usuario */}
+          <h2 className="text-[22px] font-bold text-[#2d3748] dark:text-zinc-100 mb-1">PAKO</h2>
+          <p className="text-[14px] text-[#718096] dark:text-zinc-400 mb-8">pakodilla3@gmail.com</p>
+          
+          {/* Estadísticas */}
+          <div className="flex gap-16 text-center">
+            <div className="flex flex-col items-center">
+              <span className="text-[24px] font-bold text-[#2d3748] dark:text-zinc-100 leading-none mb-1.5">12</span>
+              <span className="text-[10px] text-[#a0aec0] dark:text-zinc-500 uppercase tracking-wider font-bold">VIAJES</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="text-[24px] font-bold text-[#2d3748] dark:text-zinc-100 leading-none mb-1.5">4.8</span>
+              <span className="text-[10px] text-[#a0aec0] dark:text-zinc-500 uppercase tracking-wider font-bold">RATING</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Lista de Opciones */}
+        <div className="space-y-3 pt-2">
+          
+          <button 
+            onClick={() => navigate('/profile/edit')}
+            className="w-full bg-white dark:bg-zinc-800 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-zinc-700 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-zinc-700 transition-colors"
+          >
+            <div className="flex items-center gap-4">
+              <Edit size={20} className="text-[#00d4aa]" />
+              <span className="text-[#2d3748] dark:text-zinc-100 font-medium text-[15px]">Editar Perfil</span>
+            </div>
+            <ChevronRight size={20} className="text-[#a0aec0] dark:text-zinc-500" />
+          </button>
+
+          <button 
+            onClick={() => navigate('/settings')}
+            className="w-full bg-white dark:bg-zinc-800 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-zinc-700 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-zinc-700 transition-colors"
+          >
+            <div className="flex items-center gap-4">
+              <Settings size={20} className="text-[#00d4aa]" />
+              <span className="text-[#2d3748] dark:text-zinc-100 font-medium text-[15px]">Configuración</span>
+            </div>
+            <ChevronRight size={20} className="text-[#a0aec0] dark:text-zinc-500" />
+          </button>
+
+          <button 
+            onClick={() => alert('Función de descarga próximamente')}
+            className="w-full bg-white dark:bg-zinc-800 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-zinc-700 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-zinc-700 transition-colors"
+          >
+            <div className="flex items-center gap-4">
+              <Download size={20} className="text-[#00d4aa]" />
+              <span className="text-[#2d3748] dark:text-zinc-100 font-medium text-[15px]">Descargar APK</span>
+            </div>
+            <ChevronRight size={20} className="text-[#a0aec0] dark:text-zinc-500" />
+          </button>
+
+          <button 
+            onClick={() => alert('Sección de ayuda próximamente')}
+            className="w-full bg-white dark:bg-zinc-800 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-zinc-700 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-zinc-700 transition-colors"
+          >
+            <div className="flex items-center gap-4">
+              <HelpCircle size={20} className="text-[#00d4aa]" />
+              <span className="text-[#2d3748] dark:text-zinc-100 font-medium text-[15px]">Ayuda</span>
+            </div>
+            <ChevronRight size={20} className="text-[#a0aec0] dark:text-zinc-500" />
+          </button>
+
+          <button 
+            onClick={handleLogout}
+            className="w-full bg-white dark:bg-zinc-800 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-zinc-700 flex items-center justify-between hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors mt-2"
+          >
+            <div className="flex items-center gap-4">
+              <LogOut size={20} className="text-[#e74c3c]" />
+              <span className="text-[#e74c3c] font-medium text-[15px]">Cerrar Sesión</span>
+            </div>
+            <ChevronRight size={20} className="text-[#a0aec0] dark:text-zinc-500" />
+          </button>
+
+        </div>
+
+      </main>
+    </div>
+  );
+}
