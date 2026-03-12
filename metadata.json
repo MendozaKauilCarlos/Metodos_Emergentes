@@ -1,0 +1,5 @@
+{
+  "name": "Refactorización y Carrito de Compras",
+  "description": "Aplicación para refactorizar código espagueti y construir un carrito de compras con React y Node.js/Haskell.",
+  "requestFramePermissions": []
+}
