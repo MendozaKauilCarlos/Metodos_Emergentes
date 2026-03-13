@@ -27,6 +27,7 @@ Principalmente se contempló el uso de **Kanban**, una metodología ágil que si
 | COHEN ALAIN | Desarrollador Backend |
 | MENDOZA KAUIL | Desarrollador Frontend |
 | REYES DOLORES ALEJANDRO | Tester / Control de calidad (QA) |
+| ROSADO SANTANA ANGEL GAEL | Tester / Control de calidad (QA) |
 
 
 ## REQUISITOS DE ROL Y RESPONSABILIDADES
