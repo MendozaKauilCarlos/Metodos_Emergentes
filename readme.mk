@@ -55,3 +55,14 @@ Principalmente se contempló el uso de **Kanban**, una metodología ágil que si
 ### 6. TESTER / CONTROL DE CALIDAD (QA)
 * **Actividades**: Detectar errores, reportarlos en el tablero Kanban y verificar nuevas funcionalidades.
 * **Responsabilidades**: Atención al detalle, capacidad de análisis y comunicación clara de errores.
+
+Requerimientos para Ejecutar el Proyecto:
+* Node.js (v18 o superior)
+* npm (Node Package Manager): Viene incluido cuando se instala Node.js.
+* Configuración de Firebase: Se necesita el archivo de configuración (firebase-applet-config.json) con las llaves del proyecto de Firebase.
+
+Cómo se ejecuta
+* npm install: Lee el archivo package.json y descarga automáticamente todas las carpetas pesadas (node_modules).
+* Configurar Firebase: Se deben poner las propias credenciales de Firebase para que la base de datos funcione.
+* npm run dev: Levanta el servidor local (normalmente http://localhost:3000).
+
