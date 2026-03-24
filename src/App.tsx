@@ -1,29 +1,39 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 
-// Componentes
 import BottomNav from './components/BottomNav';
 
-// Vistas
-import Login from './views/Login';
-import Home from './views/Home';
-import DriverRequests from './views/DriverRequests';
-import DriverActiveTrips from './views/DriverActiveTrips';
-import DriverCreateRoute from './views/DriverCreateRoute';
-import Trips from './views/Trips';
-import MapView from './views/MapView';
-import Profile from './views/Profile';
-import EditProfile from './views/EditProfile';
-import Settings from './views/Settings';
+const Login = lazy(() => import('./views/Login'));
+const Home = lazy(() => import('./views/Home'));
+const DriverRequests = lazy(() => import('./views/DriverRequests'));
+const DriverActiveTrips = lazy(() => import('./views/DriverActiveTrips'));
+const DriverCreateRoute = lazy(() => import('./views/DriverCreateRoute'));
+const Trips = lazy(() => import('./views/Trips'));
+const MapView = lazy(() => import('./views/MapView'));
+const Profile = lazy(() => import('./views/Profile'));
+const EditProfile = lazy(() => import('./views/EditProfile'));
+const Settings = lazy(() => import('./views/Settings'));
+
+const PageFallback = () => (
+  <div className="min-h-screen bg-zinc-900 flex items-center justify-center text-emerald-500 text-sm">
+    Cargando vista…
+  </div>
+);
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, loading } = useAuth();
-  
-  if (loading) return <div className="min-h-screen bg-zinc-900 flex items-center justify-center text-emerald-500">Cargando...</div>;
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-zinc-900 flex items-center justify-center text-emerald-500">
+        Cargando…
+      </div>
+    );
+  }
   if (!user) return <Navigate to="/login" replace />;
-  
+
   return (
     <>
       {children}
@@ -34,62 +44,88 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
 const AppRoutes = () => {
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      
-      {/* Rutas Protegidas */}
-      <Route path="/" element={
-        <ProtectedRoute>
-          <Home />
-        </ProtectedRoute>
-      } />
+    <Suspense fallback={<PageFallback />}>
+      <Routes>
+        <Route path="/login" element={<Login />} />
 
-      {/* Rutas de Conductor */}
-      <Route path="/driver/requests" element={
-        <ProtectedRoute>
-          <DriverRequests />
-        </ProtectedRoute>
-      } />
-      <Route path="/driver/active" element={
-        <ProtectedRoute>
-          <DriverActiveTrips />
-        </ProtectedRoute>
-      } />
-      <Route path="/driver/create-route" element={
-        <ProtectedRoute>
-          <DriverCreateRoute />
-        </ProtectedRoute>
-      } />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
 
-      <Route path="/trips" element={
-        <ProtectedRoute>
-          <Trips />
-        </ProtectedRoute>
-      } />
-      <Route path="/map" element={
-        <ProtectedRoute>
-          <MapView />
-        </ProtectedRoute>
-      } />
-      <Route path="/profile" element={
-        <ProtectedRoute>
-          <Profile />
-        </ProtectedRoute>
-      } />
-      <Route path="/profile/edit" element={
-        <ProtectedRoute>
-          <EditProfile />
-        </ProtectedRoute>
-      } />
-      <Route path="/settings" element={
-        <ProtectedRoute>
-          <Settings />
-        </ProtectedRoute>
-      } />
-      
-      {/* Ruta por defecto */}
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+        <Route
+          path="/driver/requests"
+          element={
+            <ProtectedRoute>
+              <DriverRequests />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/driver/active"
+          element={
+            <ProtectedRoute>
+              <DriverActiveTrips />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/driver/create-route"
+          element={
+            <ProtectedRoute>
+              <DriverCreateRoute />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/trips"
+          element={
+            <ProtectedRoute>
+              <Trips />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/map"
+          element={
+            <ProtectedRoute>
+              <MapView />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile/edit"
+          element={
+            <ProtectedRoute>
+              <EditProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoute>
+              <Settings />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Suspense>
   );
 };
 
