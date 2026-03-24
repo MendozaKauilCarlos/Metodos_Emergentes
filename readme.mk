@@ -63,6 +63,16 @@ Requerimientos para Ejecutar el Proyecto:
 
 Cómo se ejecuta
 * npm install: Lee el archivo package.json y descarga automáticamente todas las carpetas pesadas (node_modules).
-* Configurar Firebase: Se deben poner las propias credenciales de Firebase para que la base de datos funcione.
+* Configurar Firebase: copia `.env.example` a `.env` y completa las variables `VITE_FIREBASE_*` (Consola Firebase → Configuración del proyecto → SDK).
+* Habilitar en Firebase: **Authentication** (correo/contraseña) y **Firestore Database** (modo de prueba o reglas desplegadas).
 * npm run dev: Levanta el servidor local (normalmente http://localhost:3000).
 
+### Base de datos (backend en Firestore)
+* Colección `users`: perfil por `uid` (ya se crea en el registro).
+* Colección `trips`: documentos con al menos `driverId`, `passengerName`, `status` (`SOLICITADO` | `EN_PROGRESO` | `COMPLETADO` | `CANCELADO`), `coordinates`, `address`, `price`, `createdAt` (timestamp). Opcional: `passengerId`, `time`.
+* La pantalla **Mis viajes** (conductores) escucha en tiempo real los viajes donde `driverId` coincide con el usuario autenticado.
+
+### Despliegue en Firebase Hosting
+1. Instala la CLI: `npm install -g firebase-tools` y ejecuta `firebase login`.
+2. En `.firebaserc`, sustituye `TU_PROJECT_ID_FIREBASE` por el ID real del proyecto.
+3. `npm run deploy` — construye (`vite build`) y despliega **hosting** + **reglas e índices de Firestore**.

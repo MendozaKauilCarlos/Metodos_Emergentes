@@ -81,7 +81,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         try {
           const userDoc = await getDoc(doc(db, 'users', firebaseUser.uid));
           if (userDoc.exists()) {
-            setUserData(userDoc.data() as UserData);
+            const d = userDoc.data() as Record<string, unknown>;
+            setUserData({
+              uid: firebaseUser.uid,
+              email: (d.email as string | null) ?? firebaseUser.email ?? null,
+              displayName: (d.displayName as string | null) ?? (d.name as string | null) ?? null,
+              role: d.role as UserData['role'],
+            });
           } else {
             setUserData(null);
           }

@@ -1,23 +1,29 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp, type FirebaseApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
-// TODO: Reemplaza esto con tu configuración real de Firebase
-// (Puedes encontrarla en la consola de Firebase -> Project Settings)
 const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "TU_PROYECTO.firebaseapp.com",
-  projectId: "TU_PROYECTO",
-  storageBucket: "TU_PROYECTO.appspot.com",
-  messagingSenderId: "TU_SENDER_ID",
-  appId: "TU_APP_ID"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY ?? "",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN ?? "",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID ?? "",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET ?? "",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID ?? "",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID ?? "",
 };
 
-// Inicializar Firebase
-const app = initializeApp(firebaseConfig);
+const missing = Object.entries(firebaseConfig)
+  .filter(([, v]) => !String(v).trim())
+  .map(([k]) => k);
 
-// Exportar servicios
+if (missing.length > 0) {
+  console.warn(
+    `[Firebase] Faltan variables en .env (VITE_*): ${missing.join(", ")}. Copia .env.example a .env y completa los valores de la consola de Firebase.`
+  );
+}
+
+const app: FirebaseApp = initializeApp(firebaseConfig);
+
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);

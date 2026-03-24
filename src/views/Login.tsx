@@ -35,7 +35,7 @@ export default function Login() {
       if (err.code === 'auth/user-not-found') setError('Usuario no encontrado');
       else if (err.code === 'auth/wrong-password') setError('Contraseña incorrecta');
       else if (err.code === 'auth/invalid-email') setError('Correo electrónico inválido');
-      else setError('Error al iniciar sesión. Comprueba tus credenciales de Firebase en src/services/firebase.ts');
+      else setError('Error al iniciar sesión. Comprueba el archivo .env (variables VITE_FIREBASE_*).');
     } finally {
       setLoading(false);
     }
@@ -60,6 +60,7 @@ export default function Login() {
         uid: user.uid,
         email: user.email,
         name,
+        displayName: name,
         role: userType,
         phone: userType === 'driver' ? phone : '',
         license: userType === 'driver' ? license : '',
@@ -76,7 +77,7 @@ export default function Login() {
       console.error('Error en registro:', err);
       if (err.code === 'auth/email-already-in-use') setError('Este correo ya está registrado');
       else if (err.code === 'auth/weak-password') setError('La contraseña es muy débil');
-      else setError('Error al registrar usuario. Comprueba tus credenciales de Firebase en src/services/firebase.ts');
+      else setError('Error al registrar usuario. Comprueba el archivo .env (variables VITE_FIREBASE_*).');
     } finally {
       setLoading(false);
     }
