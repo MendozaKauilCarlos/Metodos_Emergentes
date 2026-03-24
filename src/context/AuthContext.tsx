@@ -1,4 +1,11 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { User, onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../services/firebase';
@@ -36,35 +43,34 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
   const [isDemo, setIsDemo] = useState(false);
 
-  // Funciones para el Modo Demo
-  const loginAsDemo = (role: 'passenger' | 'driver') => {
+  const loginAsDemo = useCallback((role: 'passenger' | 'driver') => {
     setIsDemo(true);
     setUser({ uid: 'demo-user-123', email: 'demo@ridetoclass.com' });
     setUserData({
       uid: 'demo-user-123',
       email: 'demo@ridetoclass.com',
       displayName: 'Usuario Demo',
-      role: role
+      role,
     });
-  };
+  }, []);
 
-  const logoutDemo = () => {
+  const logoutDemo = useCallback(() => {
     setIsDemo(false);
     setUser(null);
     setUserData(null);
-  };
+  }, []);
 
-  const logout = async () => {
+  const logout = useCallback(async () => {
     if (isDemo) {
       logoutDemo();
     } else {
       try {
         await signOut(auth);
       } catch (error) {
-        console.error("Error al cerrar sesión:", error);
+        console.error('Error al cerrar sesión:', error);
       }
     }
-  };
+  }, [isDemo, logoutDemo]);
 
   useEffect(() => {
     if (isDemo) {
@@ -73,10 +79,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
 
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      if (isDemo) return; // Ignorar Firebase si estamos en demo
-      
+      if (isDemo) return;
+
       setUser(firebaseUser);
-      
+
       if (firebaseUser) {
         try {
           const userDoc = await getDoc(doc(db, 'users', firebaseUser.uid));
@@ -92,21 +98,33 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setUserData(null);
           }
         } catch (error) {
-          console.error("Error al obtener datos del usuario:", error);
+          console.error('Error al obtener datos del usuario:', error);
           setUserData(null);
         }
       } else {
         setUserData(null);
       }
-      
+
       setLoading(false);
     });
 
     return () => unsubscribe();
   }, [isDemo]);
 
+  const contextValue = useMemo(
+    () => ({
+      user,
+      userData,
+      loading,
+      loginAsDemo,
+      logoutDemo,
+      logout,
+    }),
+    [user, userData, loading, loginAsDemo, logoutDemo, logout]
+  );
+
   return (
-    <AuthContext.Provider value={{ user, userData, loading, loginAsDemo, logoutDemo, logout }}>
+    <AuthContext.Provider value={contextValue}>
       {!loading && children}
     </AuthContext.Provider>
   );
