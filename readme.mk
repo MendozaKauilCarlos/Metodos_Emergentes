@@ -56,23 +56,87 @@ Principalmente se contempló el uso de **Kanban**, una metodología ágil que si
 * **Actividades**: Detectar errores, reportarlos en el tablero Kanban y verificar nuevas funcionalidades.
 * **Responsabilidades**: Atención al detalle, capacidad de análisis y comunicación clara de errores.
 
-Requerimientos para Ejecutar el Proyecto:
-* Node.js (v18 o superior)
-* npm (Node Package Manager): Viene incluido cuando se instala Node.js.
-* Configuración de Firebase: Se necesita el archivo de configuración (firebase-applet-config.json) con las llaves del proyecto de Firebase.
+## 📋 Especificación de Requerimientos
 
-Cómo se ejecuta
-* npm install: Lee el archivo package.json y descarga automáticamente todas las carpetas pesadas (node_modules).
-* Configurar Firebase: copia `.env.example` a `.env` y completa las variables `VITE_FIREBASE_*` (Consola Firebase → Configuración del proyecto → SDK).
-* Habilitar en Firebase: **Authentication** (correo/contraseña) y **Firestore Database** (modo de prueba o reglas desplegadas).
-* npm run dev: Levanta el servidor local (normalmente http://localhost:3000).
+Para asegurar el correcto funcionamiento y desarrollo del proyecto, se han definido los siguientes requerimientos técnicos y del sistema. Esto garantiza que cualquier desarrollador o evaluador pueda ejecutar el código sin problemas.
 
-### Base de datos (backend en Firestore)
-* Colección `users`: perfil por `uid` (ya se crea en el registro).
-* Colección `trips`: documentos con al menos `driverId`, `passengerName`, `status` (`SOLICITADO` | `EN_PROGRESO` | `COMPLETADO` | `CANCELADO`), `coordinates`, `address`, `price`, `createdAt` (timestamp). Opcional: `passengerId`, `time`.
-* La pantalla **Mis viajes** (conductores) escucha en tiempo real los viajes donde `driverId` coincide con el usuario autenticado.
+### 1. Requerimientos de Hardware (Entorno de Desarrollo)
+*   **Procesador:** Intel Core i3 / AMD Ryzen 3 o superior (Recomendado i5/Ryzen 5 para tiempos de compilación óptimos).
+*   **Memoria RAM:** Mínimo 4 GB (Se recomiendan 8 GB o más para ejecutar el servidor de desarrollo y el navegador simultáneamente).
+*   **Almacenamiento:** Al menos 2 GB de espacio libre en disco (para dependencias de `node_modules` y caché).
+*   **Conexión a Internet:** Requerida para la descarga de paquetes (npm), renderizado de mapas (OpenStreetMap) y conexión con la base de datos (Firebase).
 
-### Despliegue en Firebase Hosting
-1. Instala la CLI: `npm install -g firebase-tools` y ejecuta `firebase login`.
-2. En `.firebaserc`, sustituye `TU_PROJECT_ID_FIREBASE` por el ID real del proyecto.
-3. `npm run deploy` — construye (`vite build`) y despliega **hosting** + **reglas e índices de Firestore**.
+### 2. Requerimientos de Software
+*   **Sistema Operativo:** Multiplataforma (Windows 10/11, macOS 10.15+, o distribuciones Linux basadas en Debian/Ubuntu).
+*   **Entorno de Ejecución:** [Node.js](https://nodejs.org/) versión 18.x LTS o superior.
+*   **Gestor de Paquetes:** `npm` (incluido con Node.js) o `yarn`.
+*   **Control de Versiones:** [Git](https://git-scm.com/) instalado y configurado.
+*   **Editor de Código (IDE):** Se recomienda encarecidamente **Visual Studio Code** con las siguientes extensiones instaladas:
+    *   *ESLint* (para análisis de código).
+    *   *Prettier* (para formateo automático).
+    *   *Tailwind CSS IntelliSense* (para autocompletado de clases).
+
+### 3. Requerimientos de Servicios Externos (BaaS)
+La aplicación depende de servicios en la nube para funcionar correctamente:
+*   **Firebase Authentication:** Configurado para permitir inicio de sesión con Google.
+*   **Cloud Firestore:** Base de datos NoSQL para almacenar usuarios, rutas y solicitudes en tiempo real.
+*   **Leaflet / OpenStreetMap:** Proveedor de mapas de código abierto para la geolocalización y visualización de rutas.
+
+### 4. Requerimientos Funcionales Principales
+*   **RF01:** El sistema debe permitir el registro e inicio de sesión de usuarios mediante correo institucional.
+*   **RF02:** El sistema debe permitir al usuario elegir entre el rol de "Conductor" o "Pasajero".
+*   **RF03:** Un conductor debe poder crear, editar y eliminar rutas especificando origen, destino, horario, asientos y precio.
+*   **RF04:** Un pasajero debe poder visualizar las rutas disponibles en un mapa interactivo y enviar solicitudes de viaje.
+*   **RF05:** El sistema debe mostrar el historial de viajes (Completados, Cancelados, En Progreso).
+
+### 5. Requerimientos No Funcionales
+*   **RNF01 (Usabilidad):** La interfaz debe ser intuitiva, responsiva (Mobile-First) y contar con soporte para Modo Oscuro/Claro.
+*   **RNF02 (Rendimiento):** El tiempo de carga inicial de la aplicación (TTV) no debe superar los 3 segundos en conexiones 4G.
+*   **RNF03 (Seguridad):** Las contraseñas y tokens de sesión deben ser gestionados de forma segura por Firebase, sin exponerse en el código fuente.
+
+---
+
+## 🚀 Pasos para la Instalación y Ejecución
+
+1.  **Clonar el repositorio:**
+    ```bash
+    git clone <url-del-repositorio>
+    cd <nombre-de-la-carpeta>
+    ```
+
+2.  **Instalar las dependencias:**
+    ```bash
+    npm install
+    ```
+
+3.  **Configurar Variables de Entorno:**
+    Crear un archivo llamado `firebase-applet-config.json` en la raíz del proyecto con las credenciales de Firebase:
+    ```json
+    {
+      "apiKey": "TU_API_KEY",
+      "authDomain": "TU_AUTH_DOMAIN",
+      "projectId": "TU_PROJECT_ID",
+      "storageBucket": "TU_STORAGE_BUCKET",
+      "messagingSenderId": "TU_SENDER_ID",
+      "appId": "TU_APP_ID"
+    }
+    ```
+
+4.  **Ejecutar en modo desarrollo:**
+    ```bash
+    npm run dev
+    ```
+    La aplicación estará disponible en `http://localhost:3000`.
+
+---
+
+## 🛠️ Tecnologías Utilizadas (Stack MERN/Serverless)
+*   **React 18** + **Vite** (Frontend ultrarrápido)
+*   **TypeScript** (Tipado estático para evitar errores en tiempo de ejecución)
+*   **Tailwind CSS** (Sistema de diseño basado en utilidades)
+*   **Firebase** (Backend as a Service)
+*   **React Router DOM** (Navegación SPA)
+*   **Leaflet & React-Leaflet** (Mapas interactivos)
+*   **Lucide React** (Iconografía moderna)
+
+---
