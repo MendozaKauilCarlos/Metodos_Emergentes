@@ -17,8 +17,8 @@ const missing = Object.entries(firebaseConfig)
   .map(([k]) => k);
 
 if (missing.length > 0) {
-  console.warn(
-    `[Firebase] Faltan variables en .env (VITE_*): ${missing.join(", ")}. Copia .env.example a .env y completa los valores de la consola de Firebase.`
+  throw new Error(
+    `[Firebase] Faltan variables en .env (VITE_*): ${missing.join(", ")}. Copia .env.example a .env y completa los valores desde Firebase Console.`
   );
 }
 
