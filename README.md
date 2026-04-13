@@ -1,6 +1,6 @@
 # Metodos_Emergentes
 
-Aplicacion web de transporte estudiantil desarrollada con React + Vite + TypeScript, integrada con Firebase Authentication y Cloud Firestore.
+Aplicacion web de transporte estudiantil desarrollada con React + Vite + TypeScript, integrada con Firebase Authentication y Cloud Firestore. Demo en produccion: https://ride-to-class-eeaba.web.app/
 
 ## Stack
 
@@ -53,6 +53,11 @@ npm run dev
 ```
 
 Disponible en `http://localhost:3000`.
+
+## Enlaces del proyecto desplegado
+
+- Produccion principal: [ride-to-class-eeaba.web.app](https://ride-to-class-eeaba.web.app)
+- Dominio alterno: [ride-to-class-eeaba.firebaseapp.com](https://ride-to-class-eeaba.firebaseapp.com)
 
 ## Firebase CLI y despliegue
 
