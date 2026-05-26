@@ -26,7 +26,7 @@ Principalmente se contempló el uso de **Kanban**, una metodología ágil que si
 | ALEJANDRO SÁNCHEZ | Diseñador UX/UI |
 | COHEN ALAIN | Desarrollador Backend |
 | MENDOZA KAUIL | Desarrollador Frontend |
-| REYES DOLORES ALEJANDRO | Tester / Control de calidad (QA) |
+| VEGA GUZMAN CARLA VALERIA | Tester / Control de calidad (QA) |
 | ROSADO SANTANA ANGEL GAEL | FULL STACK |
 
 
