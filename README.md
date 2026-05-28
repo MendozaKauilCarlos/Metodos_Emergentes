@@ -189,21 +189,6 @@ La aplicación depende de servicios en la nube para funcionar correctamente:
 
 ## 🎒 Módulo 3: Flujo del Pasajero (Estudiante)
 
-### HU-05: Solicitud de Aventón en Mapa Interactivo
-* **Declaración:** **Como** Pasajero, **quiero** seleccionar un punto de origen y destino directamente en el mapa, **para** publicar una solicitud de viaje clara que los conductores disponibles puedan evaluar[cite: 12].
-* **Prioridad / Esfuerzo:** Alta / Alta[cite: 12]
-* **Criterios de Aceptación:**
-  * **Dado** que el pasajero está en la vista del mapa (`/map`), al dar clic sobre el lienzo debe poder arrastrar o posicionar marcadores de origen y destino[cite: 12].
-  * **Cuando** presione "Confirmar Solicitud", se debe registrar un documento en la colección `/rideRequests/` de Firestore con el estado inicial `"pending"`[cite: 12].
-  * **Entonces** el documento guardado debe incluir obligatoriamente el campo `passengerId` emparejado con el `uid` del solicitante para cumplir las reglas de seguridad[cite: 12].
-
-### HU-06: Autocentrado de Ubicación Actual (GPS)
-* **Declaración:** **Como** Pasajero o Conductor, **quiero** usar un botón de geolocalización, **para** que la cámara del mapa se desplace inmediatamente a mis coordenadas GPS reales sin tener que buscarlas manualmente[cite: 12].
-* **Prioridad / Esfuerzo:** Media / Media[cite: 12]
-* **Criterios de Aceptación:**
-  * **Dado** que el usuario presiona el botón flotante de la diana, se debe disparar la API nativa `navigator.geolocation.getCurrentPosition`[cite: 12].
-  * **Cuando** el navegador devuelva con éxito las coordenadas, el componente interno debe detectar el cambio de estado e invocar de manera imperativa a `map.setView()`[cite: 12].
-  * **Entonces** si el GPS tarda más de 5000ms en responder, la app debe abortar el intento por timeout y alertar al usuario, manteniendo el mapa centrado en el punto base (Cancún)[cite: 12].
 
 ### HU-07: Cancelación de Viaje Solicitado
 * **Declaración:** **Como** Pasajero, **quiero** tener la opción de cancelar un viaje activo, **para** notificar al conductor de inmediato si mis planes cambiaron y liberar el espacio en el vehículo[cite: 12].
