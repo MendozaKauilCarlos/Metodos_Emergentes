@@ -139,4 +139,104 @@ La aplicación depende de servicios en la nube para funcionar correctamente:
 *   **Leaflet & React-Leaflet** (Mapas interactivos)
 *   **Lucide React** (Iconografía moderna)
 
+# Historias de Usuario (User Stories) — Proyecto Ride to Class
+
+**Ámbito del Ecosistema:** Aplicación Móvil de Transporte Compartido Estudiantil (Cancún)  
+**Metodología:** Scrum / Agile Framework  
+**Estructura Base:** Como *[Rol]* | Quiero *[Acción]* | Para *[Beneficio/Valor]*  
+
 ---
+
+## 📑 Módulo 1: Autenticación, Roles y Modo Demo
+
+### HU-01: Autenticación con Proveedor Institucional (Google)
+* **Declaración:** **Como** Estudiante universitario, **quiero** iniciar sesión en la aplicación utilizando mi cuenta de Google institucional, **para** acceder de manera rápida y segura sin necesidad de recordar una contraseña adicional[cite: 12].
+* **Prioridad / Esfuerzo:** Alta / Medio[cite: 12]
+* **Criterios de Aceptación:**
+  * **Dado** que el usuario no ha iniciado sesión, al presionar "Iniciar con Google" se debe desplegar el pop-up de autenticación de Firebase (`signInWithPopup`)[cite: 12].
+  * **Cuando** la autenticación es exitosa, el `AuthContext` debe actualizar el estado global `user` con el objeto real provisto por Firebase[cite: 12].
+  * **Entonces** la aplicación debe consultar Firestore para extraer el rol del estudiante y redirigirlo al Home (`/`), manteniendo el estado `loading` en `false`[cite: 12].
+
+### HU-02: Acceso Rápido mediante Modo Demo (Simulado)
+* **Declaración:** **Como** Desarrollador o Evaluador del proyecto, **quiero** activar un "Modo Demo" con un rol predefinido desde el login, **para** interactuar con las interfaces y flujos visuales de inmediato sin depender de internet ni credenciales reales de Firebase[cite: 12].
+* **Prioridad / Esfuerzo:** Alta / Bajo[cite: 12]
+* **Criterios de Aceptación:**
+  * **Dado** que el usuario se encuentra en la pantalla de login, al presionar "Demo Pasajero" o "Demo Conductor" se debe invocar a la función `loginAsDemo(role)`[cite: 12].
+  * **Cuando** se ejecuta dicha función, se debe inyectar un usuario simulado (`uid: 'demo-user-123'`), marcar el flag `isDemo` como `true` y forzar `loading` a `false`[cite: 12].
+  * **Entonces** el sistema debe permitir pasar el guardia de ruta (`ProtectedRoute`) y renderizar los componentes visuales consumiendo constantes locales (`mockData`)[cite: 12].
+
+---
+
+## 🚗 Módulo 2: Flujo del Conductor (Socio Estudiantil)
+
+### HU-03: Control de Disponibilidad mediante Switch
+* **Declaración:** **Como** Conductor, **quiero** activar o desactivar mi estado de conexión con un interruptor visible, **para** decidir cuándo estoy disponible en tiempo real para recibir solicitudes de estudiantes[cite: 12].
+* **Prioridad / Esfuerzo:** Alta / Media[cite: 12]
+* **Criterios de Aceptación:**
+  * **Dado** que el conductor interactúa con el componente Switch de la interfaz, el sistema debe validar previamente que sus datos vehiculares (placas, marca, modelo) estén completos en el perfil[cite: 12].
+  * **Cuando** el interruptor cambia a "Conectado", se actualiza el campo `active: true` en su documento de ruta en Firestore[cite: 12].
+  * **Entonces** si falta algún dato vehicular obligatorio, el switch debe regresar automáticamente a su estado apagado y desplegar un mensaje de advertencia[cite: 12].
+
+### HU-04: Gestión y Aceptación de Solicitudes Pendientes
+* **Declaración:** **Como** Conductor, **quiero** visualizar una lista de solicitudes entrantes de pasajeros, **para** aceptar aquellas cuyos puntos de origen coincidan óptimamente con mi trayecto ordinario[cite: 12].
+* **Prioridad / Esfuerzo:** Alta / Alta[cite: 12]
+* **Criterios de Aceptación:**
+  * **Dado** que hay solicitudes con estado `"pending"` en el sistema, el conductor conectado debe verlas listadas cronológicamente gracias al índice compuesto definido en `firestore.indexes.json`[cite: 12].
+  * **Cuando** el conductor presiona "Aceptar", el sistema cambia el estatus a `"accepted"` y crea en paralelo un registro unificado en la colección `/trips/`[cite: 12].
+  * **Entonces** el viaje se asocia automáticamente con el `driverId` del conductor actual, restringiendo el acceso de edición posterior únicamente a las tres partes interesadas (creador, conductor, pasajero)[cite: 12].
+
+---
+
+## 🎒 Módulo 3: Flujo del Pasajero (Estudiante)
+
+### HU-05: Solicitud de Aventón en Mapa Interactivo
+* **Declaración:** **Como** Pasajero, **quiero** seleccionar un punto de origen y destino directamente en el mapa, **para** publicar una solicitud de viaje clara que los conductores disponibles puedan evaluar[cite: 12].
+* **Prioridad / Esfuerzo:** Alta / Alta[cite: 12]
+* **Criterios de Aceptación:**
+  * **Dado** que el pasajero está en la vista del mapa (`/map`), al dar clic sobre el lienzo debe poder arrastrar o posicionar marcadores de origen y destino[cite: 12].
+  * **Cuando** presione "Confirmar Solicitud", se debe registrar un documento en la colección `/rideRequests/` de Firestore con el estado inicial `"pending"`[cite: 12].
+  * **Entonces** el documento guardado debe incluir obligatoriamente el campo `passengerId` emparejado con el `uid` del solicitante para cumplir las reglas de seguridad[cite: 12].
+
+### HU-06: Autocentrado de Ubicación Actual (GPS)
+* **Declaración:** **Como** Pasajero o Conductor, **quiero** usar un botón de geolocalización, **para** que la cámara del mapa se desplace inmediatamente a mis coordenadas GPS reales sin tener que buscarlas manualmente[cite: 12].
+* **Prioridad / Esfuerzo:** Media / Media[cite: 12]
+* **Criterios de Aceptación:**
+  * **Dado** que el usuario presiona el botón flotante de la diana, se debe disparar la API nativa `navigator.geolocation.getCurrentPosition`[cite: 12].
+  * **Cuando** el navegador devuelva con éxito las coordenadas, el componente interno debe detectar el cambio de estado e invocar de manera imperativa a `map.setView()`[cite: 12].
+  * **Entonces** si el GPS tarda más de 5000ms en responder, la app debe abortar el intento por timeout y alertar al usuario, manteniendo el mapa centrado en el punto base (Cancún)[cite: 12].
+
+### HU-07: Cancelación de Viaje Solicitado
+* **Declaración:** **Como** Pasajero, **quiero** tener la opción de cancelar un viaje activo, **para** notificar al conductor de inmediato si mis planes cambiaron y liberar el espacio en el vehículo[cite: 12].
+* **Prioridad / Esfuerzo:** Media / Baja[cite: 12]
+* **Criterios de Aceptación:**
+  * **Dado** que el viaje se encuentra listado en la pantalla "Mis Viajes" (`/trips`), el botón "Cancelar" solo debe estar habilitado si el estado del viaje es diferente de `"in_progress"` o `"completed"`[cite: 12].
+  * **Cuando** el pasajero confirma la acción, se actualiza el estado del documento a `"canceled"`[cite: 12].
+  * **Entonces** las reglas de Firestore deben verificar que el `request.auth.uid` coincida estrictamente con el `passengerId` del documento para autorizar la operación de escritura[cite: 12].
+
+---
+
+## 🛠️ Módulo 4: Administrador del Sistema (Backend & Moderación)
+
+### HU-08: Panel Global de Auditoría de Cuentas
+* **Declaración:** **Como** Administrador, **quiero** acceder a un panel consolidado de administración de usuarios, **para** visualizar la totalidad de cuentas registradas (pasajeros y conductores) junto con sus roles correspondientes y estado actual de perfil[cite: 13].
+* **Prioridad / Esfuerzo:** Alta / Media[cite: 13]
+* **Criterios de Aceptación:**
+  * **Dado** que el usuario ha iniciado sesión con credenciales administrativas verificadas en el backend, se le debe permitir la lectura general de la colección `/users/`[cite: 13].
+  * **Cuando** el panel se renderiza, la interfaz debe listar en una estructura organizada los campos clave: Nombre, Correo Institucional, Teléfono Celular, Rol Asignado y Estatus (`active`, `pending_review`, `suspended`)[cite: 13].
+  * **Entonces** el sistema debe filtrar o paginar los resultados para evitar sobrecargas de peticiones de lectura simultáneas en Firestore[cite: 13].
+
+### HU-09: Monitoreo e Historial de Operaciones
+* **Declaración:** **Como** Administrador, **quiero** revisar el historial completo de viajes del sistema, **para** evaluar las métricas de uso de la comunidad estudiantil y auditar trayectos realizados, activos o cancelados de forma imprevista[cite: 13].
+* **Prioridad / Esfuerzo:** Media / Media[cite: 13]
+* **Criterios de Aceptación:**
+  * **Dado** que el administrador accede a la sección de bitácoras del sistema, la aplicación debe consultar de forma segura las colecciones `/trips/` y `/rideRequests/`[cite: 13].
+  * **Cuando** se selecciona un viaje o solicitud del historial, el panel debe desplgar la trazabilidad del trayecto: ID del conductor, IDs de los pasajeros a bordo, marcas de tiempo de inicio/conclusión y coordenadas geográficas de origen/destino[cite: 13].
+  * **Entonces** la interfaz debe permitir filtrar las búsquedas por rango de fecha, ruta o por el identificador único (`uid`) de un alumno en específico[cite: 13].
+
+### HU-10: Control Comunitario y Bloqueo de Usuarios
+* **Declaración:** **Como** Administrador, **quiero** contar con la facultad de suspender o bloquear temporal o definitivamente cuentas específicas de la plataforma, **para** sancionar comportamientos indebidos que infrinjan los términos de servicio o el reglamento de convivencia escolar[cite: 13].
+* **Prioridad / Esfuerzo:** Alta / Media[cite: 13]
+* **Criterios de Aceptación:**
+  * **Dado** que un usuario ha acumulado reportes negativos o infringido las normativas de seguridad, el administrador debe tener visible un botón de acción imperativa ("Suspender Cuenta")[cite: 13].
+  * **Cuando** la acción es confirmada, el sistema debe actualizar el campo de estado de ese alumno a `status: 'suspended'` directamente en Firestore[cite: 13].
+  * **Entonces** de manera inmediata, las reglas de seguridad perimetral (`firestore.rules`) y los guardias de ruta en el cliente deben rechazar cualquier intento futuro de este usuario suspendido para publicar trayectos, reservar asientos o conectarse a la red[cite: 13].
